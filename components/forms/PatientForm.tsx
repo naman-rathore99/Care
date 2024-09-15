@@ -6,10 +6,12 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import CustomForm from "../CustomForm"
+import SubmitButton from "../SubmitButton"
+import { useState } from "react"
 
 export enum FormFieldType {
   INPUT = "input",
-  PHONE_INPUT ="phonenumber",
+  PHONE_INPUT = "phonenumber",
   TEXTAREA = "textarea",
   CHECKBOX = "checkbox",
   DATE_PICKER = "datePicker",
@@ -24,6 +26,8 @@ const formSchema = z.object({
 })
 
 export default function PatientForm() {
+
+  const [isLoading,setIsloading]=useState(false)
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -59,7 +63,24 @@ export default function PatientForm() {
           iconSrc="/assets/icons/user.svg"
           control={form.control}
         />
-        <Button type="submit">Submit</Button>
+        <CustomForm
+          fieldType={FormFieldType.INPUT}
+          name="email"
+          label="Your Email Address"
+          placeholder="jhondoe@example.com"
+          iconAlt="email"
+          iconSrc="/assets/icons/email.svg"
+          control={form.control}
+        />
+        <CustomForm
+          fieldType={FormFieldType.PHONE_INPUT}
+          name="Phone"
+          label="Phone No"
+          placeholder="+91 123456789"
+
+          control={form.control}
+        />
+        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
     </Form>
   )
