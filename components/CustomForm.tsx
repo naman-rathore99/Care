@@ -27,7 +27,7 @@ interface CustomProps {
     disable?: boolean,
     dateFormat?: string,
     showTimeSelect?: string,
-    children: React.ReactNode,
+    children?: React.ReactNode,
     renderSkeleton?: (field: any) => React.ReactNode
 }
 

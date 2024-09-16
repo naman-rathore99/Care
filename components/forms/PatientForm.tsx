@@ -8,6 +8,8 @@ import { Form } from "@/components/ui/form"
 import CustomForm from "../CustomForm"
 import SubmitButton from "../SubmitButton"
 import { useState } from "react"
+import { userFormValdiation } from "@/lib/Validation"
+import { useRouter } from "next/navigation"
 
 export enum FormFieldType {
   INPUT = "input",
@@ -19,29 +21,41 @@ export enum FormFieldType {
   SKELETON = "skeleton ",
 }
 
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-})
+// const formSchema = z.object({
+//   username: z.string().min(2, {
+//     message: "Username must be at least 2 characters.",
+//   }),
+// })
 
 export default function PatientForm() {
-
-  const [isLoading,setIsloading]=useState(false)
+const router = useRouter()
+  const [isLoading, setIsloading] = useState(false)
 
   // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof userFormValdiation>>({
+    resolver: zodResolver(userFormValdiation),
     defaultValues: {
       username: "",
+      email: "",
+      phone: ""
     },
   })
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+  async function onSubmit(username, phone, email: z.infer<typeof userFormValdiation>) {
+    setIsloading(true);
+
+    try {
+      const userData = { name, phone, email }
+      
+const user =await createUser(userData)
+
+      
+      if(user) router.push(`/patients/${user.$id}/register `)
+    } catch (error) {
+      console.log(error);
+
+    }
   }
 
   return (
@@ -77,7 +91,6 @@ export default function PatientForm() {
           name="Phone"
           label="Phone No"
           placeholder="+91 123456789"
-
           control={form.control}
         />
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
