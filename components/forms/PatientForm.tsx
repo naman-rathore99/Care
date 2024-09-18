@@ -10,6 +10,8 @@ import SubmitButton from "../SubmitButton"
 import { useState } from "react"
 import { userFormValdiation } from "@/lib/Validation"
 import { useRouter } from "next/navigation"
+import { createUser } from "@/lib/actions/patient.actions"
+import { users } from "@/lib/appwrite.config"
 
 export enum FormFieldType {
   INPUT = "input",
@@ -41,17 +43,18 @@ const router = useRouter()
     },
   })
 
-  // 2. Define a submit handler.
-  async function onSubmit(username, phone, email: z.infer<typeof userFormValdiation>) {
+  async function onSubmit({username, phone, email}: z.infer<typeof userFormValdiation>) {
     setIsloading(true);
 
     try {
-      const userData = { name, phone, email }
+      const userData = { username, phone, email }
       
 const user =await createUser(userData)
 
       
       if(user) router.push(`/patients/${user.$id}/register `)
+
+
     } catch (error) {
       console.log(error);
 
