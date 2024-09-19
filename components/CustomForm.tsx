@@ -49,11 +49,10 @@ const RenderInput = ({ field, props }: { field: any, props: CustomProps }) => {
 
             break;
 
-
         case FormFieldType.PHONE_INPUT:
             return (
                 <FormControl>
-                    <PhoneInput defaultCountry='IN' placeholder={placeholder}
+                    <PhoneInput defaultCountry='US' placeholder={placeholder}
                         international
                         withCountryCallingCode
                         value={field.value as E164Number | undefined}
