@@ -1,3 +1,4 @@
+import PatientsForm from "@/components/forms/PatientsForm";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,11 +21,11 @@ const Home = () => {
             className="mb-12 h-10 w-fit"
           />
 
-          {/* <PatientForm /> */}
+          <PatientsForm />
 
           <div className="text-14-regular mt-20 flex justify-between">
             <p className="justify-items-end text-dark-600 xl:text-left">
-              © 2024 CarePluse
+              © care
             </p>
             <Link href="/?admin=true" className="text-green-500">
               Admin
