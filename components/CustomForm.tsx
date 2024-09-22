@@ -15,6 +15,13 @@ import { FormFieldType } from './forms/PatientsForm'
 interface CustomProps {
     control: Control<any>,
     fieldtype: FormFieldType,
+    name: string,
+    label?: string,
+    placeholder?: string,
+    iconSrc?: string,
+    iconAlt?: string,
+    disabled?: string,
+    dateFormat?:string,
 
 }
 const CustomForm = ({ control, fieldtype,name,label }: CustomProps) => {
