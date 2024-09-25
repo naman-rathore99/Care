@@ -51,7 +51,7 @@ const PatientsForm = () => {  // 1. Define your form.
                 fieldtype={FormFieldType.INPUT}
                     control={form.control}
                     name="username"
-                    lable="Username"
+                    label="Username"
                     placeholder="Enter your username"
                     iconSrc="/assets/icons/user.svg"
                     iconAlt="user"
